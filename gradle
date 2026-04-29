@@ -1,3 +1,10 @@
+mkdir StudentGradleApp
+cd StudentGradleApp
+gradle init
+.\gradlew build
+.\gradlew run
+
+
 // student app.java
 import java.util.Scanner;
 
