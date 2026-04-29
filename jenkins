@@ -1,0 +1,39 @@
+https://github.com/SriramMuthuraj/temperature-prediction-
+
+pipeline {
+    agent any
+
+    environment {
+        STREAMLIT_SUPPRESS_PROMPT = "true"
+    }
+
+    stages {
+
+        stage('Clone Repo') {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/SriramMuthuraj/temperature-prediction-.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                bat '''
+                "C:\\Users\\mahsi\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m venv venv
+                call venv\\Scripts\\activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                '''
+            }
+        }
+
+        stage('Run Streamlit App') {
+            steps {
+                bat '''
+                call venv\\Scripts\\activate
+                streamlit run ml.py --server.headless true
+                '''
+            }
+        }
+    }
+}
